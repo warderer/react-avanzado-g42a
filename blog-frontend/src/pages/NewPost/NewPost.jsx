@@ -23,11 +23,27 @@ const NewPost = () => {
       // Simular envío de datos
       await new Promise(resolve => setTimeout(resolve, 1000))
       console.log('Datos del post:', data)
-      toast.success('Post creado exitosamente!')
+      toast.success(
+        <div>
+          <h3>¡Post creado exitosamente!</h3>
+          <p>Título: {data.title}</p>
+          <p>Autor: {data.author}</p>
+          <p>Categoría: {data.category}</p>
+          <p>Fecha: {new Date(data.publishDate).toLocaleString()}</p>
+        </div>,
+        { closeButton: true, autoClose: 5000, position: 'top-right' }
+      )
       reset()
     } catch (error) {
       console.error('Error al crear el post:', error)
-      alert('Error al crear el post. Intenta nuevamente.')
+      toast.error(
+        <div>
+          <h3>Error al crear el post</h3>
+          <p>Ha ocurrido un error:</p>
+          <p>{error.message}</p>
+        </div>,
+        { closeButton: true, autoClose: 5000, position: 'top-right' }
+      )
     }
   }
 
