@@ -1,9 +1,12 @@
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { postSchema } from '../../schemas/Post'
 import './NewPost.css'
 
 const NewPost = () => {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm(
     {
+      resolver: yupResolver(postSchema),
       defaultValues: {
         title: '',
         content: '',
@@ -54,11 +57,12 @@ const NewPost = () => {
           <input
             type='text'
             id='title'
-            className='form-input' // TODO: Añadir clase de error si hay errores
+            className={`form-input ${errors.title ? 'error' : ''}`}
             placeholder='Ingresa un título para tu post'
             {...register('title')}
           />
-          {/* TODO: Mostrar mensaje de error */}
+          <span className='error-message'>{errors.title?.message}</span>
+
         </div>
 
         <div className='form-group'>
@@ -68,11 +72,11 @@ const NewPost = () => {
           <textarea
             id='content'
             rows='6'
-            className='form-textarea' // TODO: Añadir clase de error si hay
+            className={`form-textarea ${errors.content ? 'error' : ''}`}
             placeholder='Escribe el contenido de tu post aquí...'
             {...register('content')}
           />
-          {/* TODO: Mostrar mensaje de error */}
+          <span className='error-message'>{errors.content?.message}</span>
         </div>
 
         <div className='form-row'>
@@ -82,7 +86,7 @@ const NewPost = () => {
             </label>
             <select
               id='category'
-              className='form-select ' // TODO: Añadir clase de error si hay
+              className={`form-select ${errors.category ? 'error' : ''}`}
               {...register('category')}
             >
               <option value=''>Selecciona una categoría</option>
@@ -92,7 +96,7 @@ const NewPost = () => {
                 </option>
               ))}
             </select>
-            {/* TODO: Mostrar mensaje de error */}
+            <span className='error-message'>{errors.category?.message}</span>
           </div>
 
           <div className='form-group'>
@@ -102,11 +106,11 @@ const NewPost = () => {
             <input
               type='text'
               id='author'
-              className='form-input ' // TODO: Añadir clase de error si hay
+              className={`form-input ${errors.author ? 'error' : ''}`}
               placeholder='Tu nombre'
               {...register('author')}
             />
-            {/* TODO: Mostrar mensaje de error */}
+            <span className='error-message'>{errors.author?.message}</span>
           </div>
         </div>
 
@@ -117,10 +121,10 @@ const NewPost = () => {
           <input
             type='datetime-local'
             id='publishDate'
-            className='form-input ' // TODO: Añadir clase de error si hay
+            className={`form-input ${errors.publishDate ? 'error' : ''}`}
             {...register('publishDate')}
           />
-          {/* TODO: Mostrar mensaje de error */}
+          <span className='error-message'>{errors.publishDate?.message}</span>
         </div>
 
         <div className='form-actions'>
