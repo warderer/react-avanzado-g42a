@@ -31,8 +31,45 @@ const Home = () => {
     fetchPosts()
   }, [])
 
+  if (loading) return <div className='loading-state'>Cargando posts...</div>
+  if (error) return <div className='error-state'>Error: {error}</div>
+
   return (
-    <h1>Home</h1>
+    <div className='home-container'>
+      <header className='home-header'>
+        <h1 className='home-title'>Blog de Publicaciones</h1>
+        <p className='home-subtitle'>Enterate de lo último que acontece en el mundo de la programación</p>
+      </header>
+
+      <div className='posts-container'>
+        {posts.map(post => (
+          <article key={post.id} className='post-card'>
+            <div className='post-image-container'>
+              <img
+                src={getRandomImageUrl(post.id)}
+                alt={`Imagen para ${post.title}`}
+                className='post-image'
+                loading='lazy'
+              />
+            </div>
+            <div className='post-content'>
+              <h2 className='post-title'>{post.title}</h2>
+              <p className='post-excerpt'>
+                {post.body.length > 100
+                  ? `${post.body.substring(0, 100)}...`
+                  : post.body}
+              </p>
+              <div className='post-meta'>
+                <span>Publicación #{post.id}</span>
+                <a href={`/post/${post.id}`} className='read-more'>
+                  Leer más
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
   )
 }
 export default Home
