@@ -1,20 +1,23 @@
+import { BrowserRouter } from 'react-router-dom'
+import BlogRoutes from './routes/BlogRoutes'
 import './App.css'
-import NewPost from './pages/NewPost/NewPost'
 
 function App () {
   return (
     <div className='app'>
-      <main className='app-main'>
-        <div className='container'>
-          <NewPost />
-        </div>
-      </main>
+      <BrowserRouter>
+        <main className='app-main'>
+          <div className='container'>
+            <BlogRoutes />
+          </div>
+        </main>
 
-      <footer className='app-footer'>
-        <div className='container'>
-          <p>© 2025 Blog de César Guerra. Todos los derechos reservados.</p>
-        </div>
-      </footer>
+        <footer className='app-footer'>
+          <div className='container'>
+            <p>© 2025 Blog de César Guerra. Todos los derechos reservados.</p>
+          </div>
+        </footer>
+      </BrowserRouter>
     </div>
   )
 }
