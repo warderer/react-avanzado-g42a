@@ -1,11 +1,13 @@
 import { BrowserRouter } from 'react-router-dom'
 import BlogRoutes from './routes/BlogRoutes'
+import Header from './components/Header/Header'
 import './App.css'
 
 function App () {
   return (
-    <div className='app'>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Header />
+      <div className='app'>
         <main className='app-main'>
           <div className='container'>
             <BlogRoutes />
@@ -17,8 +19,8 @@ function App () {
             <p>© 2025 Blog de César Guerra. Todos los derechos reservados.</p>
           </div>
         </footer>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   )
 }
 
