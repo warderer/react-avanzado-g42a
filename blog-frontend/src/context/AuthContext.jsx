@@ -42,9 +42,9 @@ function AuthProvider ({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={data}>
+    <AuthContext value={data}>
       {children}
-    </AuthContext.Provider>
+    </AuthContext>
   )
 }
 
