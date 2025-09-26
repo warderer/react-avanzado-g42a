@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom'
+import { useAuthContext } from '../../hooks/useAuth'
 import './header.css'
 
 const Header = () => {
+  const { userPayload, isAuth, logout } = useAuthContext()
+
   const menuItems = [
     { id: 'inicio', label: 'Inicio', path: '/' },
     { id: 'newpost', label: 'Escribir', path: '/newpost' },
@@ -30,18 +33,26 @@ const Header = () => {
         </div>
 
         <div className='header-right'>
-          <NavLink to='/login' className='nav-item'> Iniciar sesión</NavLink>
-          <NavLink to='/register' className='nav-item'> Registrarse</NavLink>
-          <span
-            className='nav-item'
-            onClick={() => {
-            // Aquí va la lógica para cerrar sesión
-              console.log('Haz cerrado la sesión')
-            }}
-          > Cerrar sesión
-          </span>
+          {isAuth
+            ? (
+              <span
+                className='nav-item'
+                onClick={logout}
+              > Cerrar sesión
+              </span>
+              )
+            : (
+              <>
+                <NavLink to='/login' className='nav-item'> Iniciar sesión</NavLink>
+                <NavLink to='/register' className='nav-item'> Registrarse</NavLink>
+              </>
+              )}
+
           <div className='user-profile'>
-            <span className='user-greeting'>Hola, Usuario</span>
+            <span className='user-greeting'>Hola, {
+              userPayload ? userPayload.name : 'Invitado'
+              }
+            </span>
           </div>
         </div>
       </div>
