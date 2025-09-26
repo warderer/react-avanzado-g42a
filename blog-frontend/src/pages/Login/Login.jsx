@@ -3,10 +3,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { loginSchema } from '../../schemas/Login'
 import { ToastContainer, toast } from 'react-toastify'
 import { useAuthContext } from '../../hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
 import './login.css'
 
 const Login = () => {
   const { login } = useAuthContext()
+  const navigate = useNavigate()
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm(
     {
@@ -35,7 +37,9 @@ const Login = () => {
         { closeButton: true, autoClose: 5000, position: 'top-right' }
       )
 
-      // Aquí iria la lógica de autenticación
+      setTimeout(() => {
+        navigate('/newpost') // Redirigir a la página de nuevo post después de 1.5 segundos
+      }, 1500)
     } catch (error) {
       console.error('Error al crear en el Login:', error)
       toast.error(
