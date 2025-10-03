@@ -9,5 +9,5 @@
   "keywords": [],
   "author": "César Guerra",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "module"
 }
