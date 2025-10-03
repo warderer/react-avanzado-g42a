@@ -17,5 +17,8 @@
     "extends": [
       "./node_modules/standard/eslintrc.json"
     ]
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
