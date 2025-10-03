@@ -10,7 +10,7 @@ app.use(express.json())
 
 // #3 Definir rutas
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Hola Alumnos, G42A 😉')
 })
 
 // #4 Iniciar el servidor
