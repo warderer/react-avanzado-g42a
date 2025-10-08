@@ -17,8 +17,19 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 // #3 Definir rutas
+
+// Ruta de bienvenida
 app.get('/', (req, res) => {
-  res.send('Hola Alumnos, G42A 😉')
+  res.json({
+    message: 'API del Blog 🌍',
+    endpoints: {
+      getPosts: 'GET /api/v1/posts',
+      getPost: 'GET /api/v1/posts/:id',
+      createPost: 'POST /api/v1/posts',
+      updatePost: 'PATCH /api/v1/posts/:id',
+      deletePost: 'DELETE /api/v1/posts/:id'
+    }
+  })
 })
 
 // app.get('/api/v1/posts', (req, res) => {
