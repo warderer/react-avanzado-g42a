@@ -1,6 +1,7 @@
 // #1 Importar Express
 import express from 'express'
 import cors from 'cors'
+import postsRoutes from './routes/postsRoutes.js'
 
 // #2a Crear una instancia de Express
 const app = express()
@@ -30,6 +31,8 @@ app.get('/', (req, res) => {
     }
   })
 })
+
+app.use('/api/v1/posts', postsRoutes)
 
 // #4 Iniciar el servidor
 app.listen(port, () => {
