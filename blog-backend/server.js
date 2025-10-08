@@ -34,6 +34,14 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/posts', postsRoutes)
 
+/* Manejo de Errores 404 */
+app.use((req, res) => {
+  res.status(404).json({
+    message: 'Endpoint no encontrado',
+    error: `La ruta ${req.originalUrl} no existe en el servidor`
+  })
+})
+
 // #4 Iniciar el servidor
 app.listen(port, () => {
   console.log(`Example app listening on port ${port} 🚀`)
