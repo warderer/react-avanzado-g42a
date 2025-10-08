@@ -42,5 +42,13 @@ export const updatePost = (id, postDataToUpdate) => {
     return updatedPost
 }
 
-
 // DELETE
+export const deletePost = (id) => {
+    const postIndex = postsData.findIndex(post => post.id === parseInt(id))
+    if (postIndex === -1) {
+        return null
+    }
+
+    postsData.splice(postIndex, 1)
+    return true
+}
