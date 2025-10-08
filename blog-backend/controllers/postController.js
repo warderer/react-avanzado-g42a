@@ -1,4 +1,4 @@
-import { getPost, getPosts, createPost } from '../models/Posts.js'
+import { getPost, getPosts, createPost, updatePost } from '../models/Posts.js'
 
 // CREATE
 export const createOnePost = async (req, res) => {
@@ -43,5 +43,18 @@ export const getPostById = async (req, res) => {
 }
 
 // UPDATE
+export const updateOnePost = async (req, res) => {
+  try {
+    const { id } = req.params
+    const postDataToUpdate = req.body
+    const updatedPost = await updatePost(id, postDataToUpdate)
+    if (!updatedPost) {
+      return res.status(404).json({ message: 'Post no encontrado' })
+    }
+    res.status(200).json(updatedPost)
+  } catch (error) {
+    res.status(400).json({ message: 'Error al actualizar el post', error: error.message })
+  }
+}
 
 // DELETE
