@@ -2,6 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import postsRoutes from './routes/postsRoutes.js'
+import connectDB from './config/db.js'
 
 // #2a Crear una instancia de Express
 const app = express()
@@ -41,6 +42,9 @@ app.use((req, res) => {
     error: `La ruta ${req.originalUrl} no existe en el servidor`
   })
 })
+
+// Conectar a la base de datos
+connectDB()
 
 // #4 Iniciar el servidor
 app.listen(port, () => {
