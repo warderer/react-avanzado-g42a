@@ -32,11 +32,15 @@ export const getPost = async (id) => {
 }
 
 // UPDATE
-export const updatePost = (id, postDataToUpdate) => {
-
+export const updatePost = async (id, postDataToUpdate) => {
+  const updatedPost = await Post.findByIdAndUpdate(
+    id,
+    { $set: postDataToUpdate }, // Usar $set para actualizar solo los campos proporcionados
+    { new: true }) // Devuelve el documento actualizado
+  return updatedPost
 }
 
 // DELETE
-export const deletePost = (id) => {
+export const deletePost = async (id) => {
 
 }
