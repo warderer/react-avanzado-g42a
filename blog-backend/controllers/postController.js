@@ -6,7 +6,8 @@ export const createOnePost = async (req, res) => {
     const postData = {
       userId: req.body.userId,
       title: req.body.title,
-      body: req.body.body
+      body: req.body.body,
+      imageUrl: req.body.imageUrl
     }
     const newPost = await createPost(postData)
     res.status(201).json(newPost)

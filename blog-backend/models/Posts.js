@@ -1,54 +1,42 @@
-// Datos iniciales en Memoria
-import postsData from '../data/posts.json' with { type: 'json' }
+import mongoose from 'mongoose'
+import postSchema from '../schemas/postSchema.js'
+
+// Creo el modelo a partir del esquema
+const Post = mongoose.model('Post', postSchema)
 
 // CREATE
-export const createPost = (postData) => {
-    const newPost = {
-        userId: postData.userId,
-        id: postData.length > 0 ? Math.max(...postsData.map(post => post.id)) + 1 : 1,
-        title: postData.title,
-        body: postData.body,
-        ...postData
-    }
-
-    postsData.push(newPost)
-    return newPost
+export const createPost = async (postData) => {
+  console.log('Creating post with data:', postData)
+  try {
+    const newPost = new Post({
+      userId: postData.userId,
+      title: postData.title,
+      body: postData.body,
+      imageUrl: postData.imageUrl,
+      ...postData
+    })
+    return await newPost.save()
+  } catch (error) {
+    console.error('Error creating post:', error)
+    throw error
+  }
 }
-
 
 // READ
 export const getPosts = () => {
-    return postsData
+
 }
 
 export const getPost = (id) => {
-    return postsData.find(post => post.id === parseInt(id))
+
 }
 
 // UPDATE
 export const updatePost = (id, postDataToUpdate) => {
-    // Comprobar que exista el post
-    const postIndex = postsData.findIndex(post => post.id === parseInt(id))
-    if (postIndex === -1) {
-        return null
-    }
 
-    const updatedPost = {
-        ...postsData[postIndex],
-        ...postDataToUpdate
-    }
-
-    postsData[postIndex] = updatedPost
-    return updatedPost
 }
 
 // DELETE
 export const deletePost = (id) => {
-    const postIndex = postsData.findIndex(post => post.id === parseInt(id))
-    if (postIndex === -1) {
-        return null
-    }
 
-    postsData.splice(postIndex, 1)
-    return true
 }
