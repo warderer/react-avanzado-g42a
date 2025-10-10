@@ -42,5 +42,6 @@ export const updatePost = async (id, postDataToUpdate) => {
 
 // DELETE
 export const deletePost = async (id) => {
-
+  const result = await Post.findByIdAndDelete(id)
+  return !!result // Devuelve true si se eliminó un documento, false si no se encontró
 }
