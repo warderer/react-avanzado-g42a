@@ -23,12 +23,12 @@ export const createPost = async (postData) => {
 }
 
 // READ
-export const getPosts = () => {
-
+export const getPosts = async () => {
+  return await Post.find().sort({ createdAt: -1 }) // Ordenar por fecha de creación descendente
 }
 
-export const getPost = (id) => {
-
+export const getPost = async (id) => {
+  return await Post.findById(id)
 }
 
 // UPDATE
