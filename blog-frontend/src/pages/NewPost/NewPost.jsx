@@ -10,10 +10,10 @@ const NewPost = () => {
       resolver: yupResolver(postSchema),
       defaultValues: {
         title: '',
-        content: '',
+        body: '',
         category: '',
         author: '',
-        publishDate: ''
+        imageUrl: ''
       }
     }
   )
