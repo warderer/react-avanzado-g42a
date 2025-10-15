@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/v1/posts')
+        const response = await fetch('https://react-avanzado-g42a.onrender.com/api/v1/posts')
         if (!response.ok) {
           throw new Error('Error al obtener los posts')
         }
@@ -74,8 +74,8 @@ const Home = () => {
                   : post.body}
               </p>
               <div className='post-meta'>
-                <span>Publicación #{post.id}</span>
-                <a href={`/post/${post.id}`} className='read-more'>
+                <span>Publicación #{post._id}</span>
+                <a href={`/post/${post._id}`} className='read-more'>
                   Leer más
                 </a>
               </div>
