@@ -143,7 +143,7 @@ const NewPost = () => {
 
         <div className='form-group'>
           <label htmlFor='imageUrl' className='form-label'>
-            Fecha de Publicación *
+            URL de la Imagen *
           </label>
           <input
             type='text'
