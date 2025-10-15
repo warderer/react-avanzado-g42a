@@ -20,16 +20,26 @@ const NewPost = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Simular envío de datos
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      console.log('Datos del post:', data)
+      const response = await fetch('https://react-avanzado-g42a.onrender.com/api/v1/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      if (!response.ok) {
+        throw new Error('Error al crear el post')
+      }
+      const result = await response.json()
+
+      console.log('Datos del post:', result)
       toast.success(
         <div>
           <h3>¡Post creado exitosamente!</h3>
-          <p>Título: {data.title}</p>
-          <p>Autor: {data.author}</p>
-          <p>Categoría: {data.category}</p>
-          <p>Fecha: {new Date(data.publishDate).toLocaleString()}</p>
+          <p>Título: {result.title}</p>
+          <p>Autor: {result.author}</p>
+          <p>Categoría: {result.category}</p>
+          <p>Imagen: {result.imageUrl}</p>
         </div>,
         { closeButton: true, autoClose: 5000, position: 'top-right' }
       )
@@ -83,15 +93,15 @@ const NewPost = () => {
         </div>
 
         <div className='form-group'>
-          <label htmlFor='content' className='form-label'>
+          <label htmlFor='body' className='form-label'>
             Contenido *
           </label>
           <textarea
-            id='content'
+            id='body'
             rows='6'
             className={`form-textarea ${errors.content ? 'error' : ''}`}
             placeholder='Escribe el contenido de tu post aquí...'
-            {...register('content')}
+            {...register('body')}
           />
           <span className='error-message'>{errors.content?.message}</span>
         </div>
@@ -117,31 +127,31 @@ const NewPost = () => {
           </div>
 
           <div className='form-group'>
-            <label htmlFor='author' className='form-label'>
+            <label htmlFor='userId' className='form-label'>
               Autor *
             </label>
             <input
               type='text'
-              id='author'
+              id='userId'
               className={`form-input ${errors.author ? 'error' : ''}`}
-              placeholder='Tu nombre'
-              {...register('author')}
+              placeholder='Tu Id de usuario'
+              {...register('userId')}
             />
             <span className='error-message'>{errors.author?.message}</span>
           </div>
         </div>
 
         <div className='form-group'>
-          <label htmlFor='publishDate' className='form-label'>
+          <label htmlFor='imageUrl' className='form-label'>
             Fecha de Publicación *
           </label>
           <input
-            type='datetime-local'
-            id='publishDate'
-            className={`form-input ${errors.publishDate ? 'error' : ''}`}
-            {...register('publishDate')}
+            type='text'
+            id='imageUrl'
+            className={`form-input ${errors.imageUrl ? 'error' : ''}`}
+            {...register('imageUrl')}
           />
-          <span className='error-message'>{errors.publishDate?.message}</span>
+          <span className='error-message'>{errors.imageUrl?.message}</span>
         </div>
 
         <div className='form-actions'>

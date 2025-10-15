@@ -6,7 +6,7 @@ export const postSchema = yup.object({
     .required('El título es requerido')
     .min(5, 'El título debe tener al menos 5 caracteres')
     .max(100, 'El título no puede exceder 100 caracteres'),
-  content: yup
+  body: yup
     .string()
     .required('El contenido es requerido')
     .min(20, 'El contenido debe tener al menos 20 caracteres'),
@@ -24,12 +24,10 @@ export const postSchema = yup.object({
       'Salud',
       'Viajes'
     ], 'La categoría debe ser una opción válida'),
-  author: yup
+  userId: yup
+    .number()
+    .required('El autor es requerido'),
+  imageUrl: yup
     .string()
-    .required('El autor es requerido')
-    .min(2, 'El nombre del autor debe tener al menos 2 caracteres'),
-  publishDate: yup
-    .date()
-    .required('La fecha de publicación es requerida')
-    .min(new Date(), 'La fecha debe ser posterior a hoy')
+    .required('La URL de la imagen es requerida')
 }).required()
