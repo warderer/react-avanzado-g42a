@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
 import './home.css'
 
-const getRandomImageUrl = (postId) => {
-  const ImageId = 100 + postId
-  return `https://picsum.photos/id/${ImageId}/600/400`
-}
-
 const POSTS_PER_PAGE = 8
 
 const Home = () => {
@@ -60,7 +55,7 @@ const Home = () => {
           <article key={post.id} className='post-card'>
             <div className='post-image-container'>
               <img
-                src={getRandomImageUrl(post.id)}
+                src={post.imageUrl}
                 alt={`Imagen para ${post.title}`}
                 className='post-image'
                 loading='lazy'
